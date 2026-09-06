@@ -1,0 +1,23 @@
+An exception is an object representing an abnormal condition that interrupts the normal flow of a program's execution.
+
+                    Object
+                       |
+                   Throwable
+                  /         \
+             Error          Exception
+                            /       \
+                 RuntimeException    Checked Exceptions
+                       |
+              NullPointerException
+              IllegalArgumentException
+              ArithmeticException
+              etc.
+
+Exception VS Error:
+- Exception represents conditions that an application may reasonably handle.
+  Example: IOException, SQLException, IllegalArgumentException, NullPointerException, TimeoutException etc.
+
+-Error represents serious  JVM/system-level problems.
+ Example: OutOfMemoryError, StackOverflowError, NoClassDefFoundError, etc.
+
+Note: Errors are not meant to be caught by applications, while exceptions can be caught and handled.
