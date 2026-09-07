@@ -21,3 +21,57 @@ Exception VS Error:
  Example: OutOfMemoryError, StackOverflowError, NoClassDefFoundError, etc.
 
 Note: Errors are not meant to be caught by applications, while exceptions can be caught and handled.
+
+
+Checked vs Unchecked Exceptions:
+- Checked Exceptions: Compiler forces you to handle or declare it
+  Example: IOException, SQLException, ClassNotFoundException, etc.
+   public void readFile() throwss IOException {    // It throws IOException
+       // code that may throw IOException
+   }
+
+   or
+   try{
+        ...
+   } catch(){
+        ...
+   }
+
+
+- Unchecked Exceptions: Compiler does not force you to handle or declare it. Subclass of RuntimeException
+  Example: NullPointerException, IllegalArgumentException, ArithmeticException, etc.
+
+  public void process(int n){
+    if(n==null){
+        throw new NullPointerException("Input cannot be null");
+    }
+  }
+
+Throw VS Throws
+
+throw -> action
+throws -> declaration
+
+Does finally Always Execute?
+    Normally yes, but not absolutely always.
+    For example:
+
+        try {
+            System.out.println("Hello");
+            System.exit(0);
+        } finally {
+            System.out.println("Finally");
+        }
+
+    finally may not execute because the JVM terminates.
+    Other extreme cases include:
+        JVM crash
+        OS termination
+        power failure
+        native-level failure
+
+    Therefore:
+        "finally always executes" is not technically correct.
+    Better answer:
+
+        Finally executes during normal control-flow unwinding, except when the JVM/process terminates abruptly or execution cannot continue.
