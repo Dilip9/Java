@@ -19,4 +19,5 @@ public class Result {
     public String traceId;
     public String errorCode;
     public Instant timestamp;
+    public Object data;
 }

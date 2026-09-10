@@ -1,6 +1,7 @@
 package gouri.JL.JLException;
 
 import gouri.JL.enums.Branches;
+import gouri.JL.utility.JLStatusCode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,5 +23,42 @@ public class JLExceptionDemo {
             new JLUser("Ivy Green", "ivy Green", "9999999999", UUID.randomUUID(), Branches.CSE),
             new JLUser("Jack Black", "jack Black", "0000000000", UUID.randomUUID(), Branches.ECE)
     );
+
+    public static void main(String[] args) {
+        JLExceptionDemo demo = new JLExceptionDemo();
+        demo.validateUsers();
+    }
+
+    private Result validateUsers() {
+        Result result = new Result();
+        try {
+            for (JLUser user : users) {
+                if (user.getUsername() == null || user.getUsername().isEmpty()) {
+                    throw new JLException("Username cannot be null or empty");
+                }
+                if (user.getEmail() == null || user.getEmail().isEmpty()) {
+                    throw new JLException("Email cannot be null or empty");
+                }
+                if (user.getContactNumber() == null || user.getContactNumber().isEmpty()) {
+                    throw new JLException("Contact number cannot be null or empty");
+                }
+                if (user.getSSN() == null) {
+                    throw new JLException("SSN cannot be null");
+                }
+                if (user.getBranch() == null) {
+                    throw new JLException("Branch cannot be null");
+                }
+            }
+            result.setMessage("All users are valid");
+            result.setStatusCode(JLStatusCode.SUCCESS);
+        } catch (JLException e) {
+            result.setMessage(e.getMessage());
+            result.setStatusCode(JLStatusCode.GENERIC_ERROR);
+        } catch (Exception e) {
+            result.setMessage("An unexpected error occurred: " + e.getMessage());
+            result.setStatusCode(JLStatusCode.GENERIC_ERROR);
+        }
+        return result;
+    }
 
 }
